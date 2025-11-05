@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Spectrum</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Adobe Clean', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #2c2c2c;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #ffffff;
+            border-right: 1px solid #e1e1e1;
+            overflow-y: auto;
+            padding: 24px 0;
+        }
+
+        .logo {
+            padding: 0 24px 32px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1473e6;
+        }
+
+        .nav-section {
+            margin-bottom: 24px;
+        }
+
+        .nav-title {
+            padding: 8px 24px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #001E32;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            color: #001E32;
+        }
+
+        .nav-item:hover {
+            background: #f5f5f5;
+        }
+
+        .nav-item.active {
+            background: #fad4dc;
+            color: #CB2B4F;
+            border-left: 3px solid #CB2B4F;
+            padding-left: 21px;
+        }
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 48px 64px;
+        }
+
+        .component-header {
+            margin-bottom: 48px;
+        }
+
+        .component-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #2c2c2c;
+        }
+
+        .component-description {
+            font-size: 18px;
+            color: #747474;
+            line-height: 1.6;
+        }
+
+        .component-section {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #2c2c2c;
+        }
+
+        .component-preview {
+            background: #fafafa;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            padding: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .code-block {
+            background: #2c2c2c;
+            color: #f5f5f5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .code-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #747474;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e1e1e1;
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #747474;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: #2c2c2c;
+        }
+
+        .tab.active {
+            color: #1473e6;
+            border-bottom-color: #1473e6;
+        }
+
+        .spectrum-button {
+            background: #1473e6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .spectrum-button:hover {
+            background: #0d66d0;
+        }
+
+        .spectrum-input {
+            padding: 10px 12px;
+            border: 1px solid #bcbcbc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 300px;
+            transition: border-color 0.2s;
+        }
+
+        .spectrum-input:focus {
+            outline: none;
+            border-color: #1473e6;
+            box-shadow: 0 0 0 1px #1473e6;
+        }
+
+        .spectrum-card {
+            background: white;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            padding: 24px;
+            width: 300px;
+        }
+
+        .spectrum-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e8f3ff;
+            color: #1473e6;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .spectrum-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #1473e6;
+        }
+
+        .spectrum-switch {
+            width: 42px;
+            height: 24px;
+            background: #bcbcbc;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .spectrum-switch.active {
+            background: #1473e6;
+        }
+
+        .spectrum-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: left 0.2s;
+        }
+
+        .spectrum-switch.active::after {
+            left: 21px;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .color-box {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .typography-sample {
+            margin-bottom: 24px;
+        }
+
+        .content-text {
+            line-height: 1.8;
+            color: #2c2c2c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" x-data="{
+        selected: 'colors',
+        activeTab: 'preview',
+        switchActive: false,
+        sections: {
+            colors: {
+                name: 'Paleta de Cores',
+                description: 'Cores principais do design system para manter consistência visual em toda a aplicação.',
+                type: 'foundation'
+            },
+            typography: {
+                name: 'Tipografia',
+                description: 'Estilos de texto e hierarquia tipográfica para garantir legibilidade e organização.',
+                type: 'foundation'
+            },
+            texts: {
+                name: 'Textos e Links',
+                description: 'Componentes de texto e links para apresentação de conteúdo e navegação.',
+                type: 'component',
+                html: '<p style=&quot;margin-bottom: 16px;&quot;>Este é um parágrafo de texto padrão.</p>\n<a href=&quot;#&quot; style=&quot;color: #1473e6; text-decoration: none;&quot;>Este é um link</a>',
+                css: 'p {\n    font-size: 14px;\n    line-height: 1.6;\n    color: #2c2c2c;\n}\n\na {\n    color: #1473e6;\n    text-decoration: none;\n    transition: color 0.2s;\n}\n\na:hover {\n    color: #0d66d0;\n    text-decoration: underline;\n}'
+            },
+            buttons: {
+                name: 'Botões',
+                description: 'Botões permitem que usuários executem ações com um único toque.',
+                type: 'component',
+                html: '<button class=&quot;spectrum-button&quot;>Click me</button>',
+                css: '.spectrum-button {\n    background: #1473e6;\n    color: white;\n    border: none;\n    padding: 12px 24px;\n    border-radius: 4px;\n    font-size: 14px;\n    font-weight: 500;\n    cursor: pointer;\n    transition: background 0.2s;\n}\n\n.spectrum-button:hover {\n    background: #0d66d0;\n}'
+            },
+            dropdown: {
+                name: 'Dropdown',
+                description: 'Dropdowns permitem que usuários selecionem uma opção de uma lista.',
+                type: 'component',
+                html: '<select class=&quot;spectrum-input&quot;>\n    <option>Opção 1</option>\n    <option>Opção 2</option>\n    <option>Opção 3</option>\n</select>',
+                css: 'select {\n    padding: 10px 12px;\n    border: 1px solid #bcbcbc;\n    border-radius: 4px;\n    font-size: 14px;\n    width: 300px;\n    cursor: pointer;\n}'
+            },
+            cards: {
+                name: 'Cards',
+                description: 'Cards são containers que agrupam informações relacionadas.',
+                type: 'component',
+                html: '<div class=&quot;spectrum-card&quot;>\n    <h3 style=&quot;margin-bottom: 12px;&quot;>Card Title</h3>\n    <p style=&quot;color: #747474;&quot;>Este é o conteúdo do card com informações relevantes.</p>\n</div>',
+                css: '.spectrum-card {\n    background: white;\n    border: 1px solid #e1e1e1;\n    border-radius: 8px;\n    padding: 24px;\n    width: 300px;\n}'
+            },
+            icons: {
+                name: 'Ícones',
+                description: 'Ícones são elementos visuais que representam ações, objetos ou conceitos.',
+                type: 'component',
+                html: '<svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;#1473e6&quot; stroke-width=&quot;2&quot;>\n    <circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot;/>\n    <path d=&quot;M12 6v6l4 2&quot;/>\n</svg>',
+                css: 'svg {\n    display: inline-block;\n    vertical-align: middle;\n}'
+            },
+            images: {
+                name: 'Imagens',
+                description: 'Diretrizes para uso de imagens e elementos visuais no design system.',
+                type: 'component',
+                html: '<img src=&quot;https://via.placeholder.com/300x200&quot; alt=&quot;Exemplo&quot; style=&quot;border-radius: 8px; max-width: 100%;&quot;>',
+                css: 'img {\n    max-width: 100%;\n    height: auto;\n    border-radius: 8px;\n    display: block;\n}'
+            },
+            templates: {
+                name: 'Templates',
+                description: 'Templates pré-definidos para acelerar o desenvolvimento de interfaces comuns.',
+                type: 'resource'
+            },
+            guidelines: {
+                name: 'Guideline de Uso',
+                description: 'Diretrizes e boas práticas para uso correto dos componentes do design system.',
+                type: 'resource'
+            }
+        }
+    }">
+        <div class="sidebar">
+            <div style="display: flex; justify-content: center;">
+                <img src="logo-rede-feminina.png" style="height: 90px; width: 200px;" alt="Logo">
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Fundamentos</div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'colors' }"
+                     @click="selected = 'colors'; activeTab = 'preview'">
+                    Paleta de Cores
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'typography' }"
+                     @click="selected = 'typography'; activeTab = 'preview'">
+                    Tipografia
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Componentes</div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'texts' }"
+                     @click="selected = 'texts'; activeTab = 'preview'">
+                    Textos e Links
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'buttons' }"
+                     @click="selected = 'buttons'; activeTab = 'preview'">
+                    Botões
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'dropdown' }"
+                     @click="selected = 'dropdown'; activeTab = 'preview'">
+                    Dropdown
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'cards' }"
+                     @click="selected = 'cards'; activeTab = 'preview'">
+                    Cards
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'icons' }"
+                     @click="selected = 'icons'; activeTab = 'preview'">
+                    Ícones
+                </div>
+                <div class="nav-item" 
+                     :class="{ 'active': selected === 'images' }"
+                     @click="selected = 'images'; activeTab = 'preview'">
+                    Imagens
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Recursos</div>
+                <div class="nav-item" 
+                    :class="{ 'active': selected === 'templates' }"
+                    @click="selected = 'templates'; activeTab = 'preview'">
+                    Templates
+                </div>
+                <div class="nav-item" 
+                    :class="{ 'active': selected === 'guidelines' }"
+                    @click="selected = 'guidelines'; activeTab = 'preview'">
+                    Guideline de Uso
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="component-header">
+                <h1 class="component-title" x-text="sections[selected].name"></h1>
+                <p class="component-description" x-text="sections[selected].description"></p>
+            </div>
+
+            <!-- Seção de Cores -->
+            <div x-show="selected === 'colors'" class="component-section">
+                <h3 class="section-title">Cores Principais</h3>
+                <div class="color-palette">
+                    <div class="color-box" style="background: #ce7b90;">#ce7b90<br>Primária</div>
+                    <div class="color-box" style="background: #ffc4c4;">#ffc4c4<br>Primária clara</div>
+                    <div class="color-box" style="background: #850e35;">#850e35<br>Primária escura</div>
+                    <div class="color-box" style="background: #213161;">#213161<br>Secundária</div>
+                    <div class="color-box" style="background: #545f71;">#545f71<br>Secundária clara</div>
+                    <div class="color-box" style="background: #161f3e;">#161f3e<br>Secundária escura</div>
+                    <div class="color-box" style="background: #759aab;">#759aab<br>Terciária</div>
+                    <div class="color-box" style="background: #618191;">#618191<br>Terciária clara</div>
+                    <div class="color-box" style="background: #a6bcc7;">#a6bcc7<br>Terciária escura</div>
+                </div>
+            </div>
+
+            <!-- Seção de Tipografia -->
+            <div x-show="selected === 'typography'" class="component-section">
+                <div class="typography-sample">
+                    <h1 style="font-size: 36px; font-weight: 700; margin-bottom: 16px;">Heading 1 - 36px Bold</h1>
+                    <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">Heading 2 - 24px Bold</h2>
+                    <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">Heading 3 - 20px Semibold</h3>
+                    <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Heading 4 - 18px Semibold</h4>
+                    <p style="font-size: 14px; margin-bottom: 16px;">Body Text - 14px Regular</p>
+                    <p style="font-size: 12px; margin-bottom: 16px;">Small Text - 12px Regular</p>
+                </div>
+            </div>
+
+            <!-- Seções com Componentes -->
+            <div x-show="sections[selected].type === 'component'" class="component-section">
+                <div class="tabs">
+                    <div class="tab" 
+                         :class="{ 'active': activeTab === 'preview' }"
+                         @click="activeTab = 'preview'">
+                        Preview
+                    </div>
+                    <div class="tab" 
+                         :class="{ 'active': activeTab === 'code' }"
+                         @click="activeTab = 'code'">
+                        Code
+                    </div>
+                </div>
+
+                <div x-show="activeTab === 'preview'">
+                    <h3 class="section-title">Exemplo</h3>
+                    <div class="component-preview">
+                        <!-- Textos e Links -->
+                        <template x-if="selected === 'texts'">
+                            <div>
+                                <p style="margin-bottom: 16px;">Este é um parágrafo de texto padrão.</p>
+                                <a href="#" style="color: #1473e6; text-decoration: none;">Este é um link</a>
+                            </div>
+                        </template>
+
+                        <!-- Botões -->
+                        <template x-if="selected === 'buttons'">
+                            <button class="spectrum-button">Click me</button>
+                        </template>
+
+                        <!-- Dropdown -->
+                        <template x-if="selected === 'dropdown'">
+                            <select class="spectrum-input">
+                                <option>Opção 1</option>
+                                <option>Opção 2</option>
+                                <option>Opção 3</option>
+                            </select>
+                        </template>
+
+                        <!-- Cards -->
+                        <template x-if="selected === 'cards'">
+                            <div class="spectrum-card">
+                                <h3 style="margin-bottom: 12px;">Card Title</h3>
+                                <p style="color: #747474;">Este é o conteúdo do card com informações relevantes.</p>
+                            </div>
+                        </template>
+
+                        <!-- Ícones -->
+                        <template x-if="selected === 'icons'">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1473e6" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </template>
+
+                        <!-- Imagens -->
+                        <template x-if="selected === 'images'">
+                            <img src="https://via.placeholder.com/300x200" alt="Exemplo" style="border-radius: 8px; max-width: 100%;">
+                        </template>
+                    </div>
+                </div>
+
+                <div x-show="activeTab === 'code'">
+                    <div style="margin-bottom: 32px;">
+                        <div class="code-label">HTML</div>
+                        <div class="code-block">
+                            <pre x-text="sections[selected].html"></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="code-label">CSS</div>
+                        <div class="code-block">
+                            <pre x-text="sections[selected].css"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Templates -->
+            <div x-show="selected === 'templates'" class="component-section">
+                <h3 class="section-title">Templates Disponíveis</h3>
+                <div class="content-text">
+                    <p style="margin-bottom: 16px;">Em breve: templates prontos para uso incluindo layouts de página, formulários, dashboards e muito mais.</p>
+                </div>
+            </div>
+
+            <!-- Seção de Guidelines -->
+            <div x-show="selected === 'guidelines'" class="component-section">
+                <h3 class="section-title">Boas Práticas</h3>
+                <div class="content-text">
+                    <p style="margin-bottom: 16px;">• Mantenha consistência visual usando sempre as cores da paleta definida</p>
+                    <p style="margin-bottom: 16px;">• Use a hierarquia tipográfica adequada para organizar o conteúdo</p>
+                    <p style="margin-bottom: 16px;">• Aplique espaçamentos consistentes entre elementos</p>
+                    <p style="margin-bottom: 16px;">• Teste a acessibilidade de todos os componentes</p>
+                    <p>• Documente modificações e novos componentes criados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
