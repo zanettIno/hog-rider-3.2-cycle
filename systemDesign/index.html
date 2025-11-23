@@ -3,560 +3,867 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design System - Spectrum</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>Design System - Rede Feminina</title>
 
-        body {
-            font-family: 'Adobe Clean', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-            color: #2c2c2c;
-        }
-
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: #ffffff;
-            border-right: 1px solid #e1e1e1;
-            overflow-y: auto;
-            padding: 24px 0;
-        }
-
-        .logo {
-            padding: 0 24px 32px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1473e6;
-        }
-
-        .nav-section {
-            margin-bottom: 24px;
-        }
-
-        .nav-title {
-            padding: 8px 24px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #001E32;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-item {
-            padding: 10px 24px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-            color: #001E32;
-        }
-
-        .nav-item:hover {
-            background: #f5f5f5;
-        }
-
-        .nav-item.active {
-            background: #fad4dc;
-            color: #CB2B4F;
-            border-left: 3px solid #CB2B4F;
-            padding-left: 21px;
-        }
-
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 48px 64px;
-        }
-
-        .component-header {
-            margin-bottom: 48px;
-        }
-
-        .component-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: #2c2c2c;
-        }
-
-        .component-description {
-            font-size: 18px;
-            color: #747474;
-            line-height: 1.6;
-        }
-
-        .component-section {
-            background: white;
-            border-radius: 8px;
-            padding: 32px;
-            margin-bottom: 32px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: #2c2c2c;
-        }
-
-        .component-preview {
-            background: #fafafa;
-            border: 1px solid #e1e1e1;
-            border-radius: 4px;
-            padding: 48px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 200px;
-        }
-
-        .code-block {
-            background: #2c2c2c;
-            color: #f5f5f5;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 16px;
-            overflow-x: auto;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .code-block pre {
-            margin: 0;
-        }
-
-        .code-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #747474;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #e1e1e1;
-            margin-bottom: 24px;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #747474;
-            transition: all 0.2s;
-        }
-
-        .tab:hover {
-            color: #2c2c2c;
-        }
-
-        .tab.active {
-            color: #1473e6;
-            border-bottom-color: #1473e6;
-        }
-
-        .spectrum-button {
-            background: #1473e6;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .spectrum-button:hover {
-            background: #0d66d0;
-        }
-
-        .spectrum-input {
-            padding: 10px 12px;
-            border: 1px solid #bcbcbc;
-            border-radius: 4px;
-            font-size: 14px;
-            width: 300px;
-            transition: border-color 0.2s;
-        }
-
-        .spectrum-input:focus {
-            outline: none;
-            border-color: #1473e6;
-            box-shadow: 0 0 0 1px #1473e6;
-        }
-
-        .spectrum-card {
-            background: white;
-            border: 1px solid #e1e1e1;
-            border-radius: 8px;
-            padding: 24px;
-            width: 300px;
-        }
-
-        .spectrum-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #e8f3ff;
-            color: #1473e6;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .spectrum-checkbox {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #1473e6;
-        }
-
-        .spectrum-switch {
-            width: 42px;
-            height: 24px;
-            background: #bcbcbc;
-            border-radius: 12px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .spectrum-switch.active {
-            background: #1473e6;
-        }
-
-        .spectrum-switch::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            transition: left 0.2s;
-        }
-
-        .spectrum-switch.active::after {
-            left: 21px;
-        }
-
-        .color-palette {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .color-box {
-            width: 120px;
-            height: 120px;
-            border-radius: 8px;
-            display: flex;
-            align-items: flex-end;
-            padding: 12px;
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .typography-sample {
-            margin-bottom: 24px;
-        }
-
-        .content-text {
-            line-height: 1.8;
-            color: #2c2c2c;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container" x-data="{
-        selected: 'colors',
-        activeTab: 'preview',
-        switchActive: false,
-        sections: {
-            colors: {
-                name: 'Paleta de Cores',
-                description: 'Cores principais do design system para manter consistência visual em toda a aplicação.',
-                type: 'foundation'
-            },
-            typography: {
-                name: 'Tipografia',
-                description: 'Estilos de texto e hierarquia tipográfica para garantir legibilidade e organização.',
-                type: 'foundation'
-            },
-            texts: {
-                name: 'Textos e Links',
-                description: 'Componentes de texto e links para apresentação de conteúdo e navegação.',
-                type: 'component',
-                html: '<p style=&quot;margin-bottom: 16px;&quot;>Este é um parágrafo de texto padrão.</p>\n<a href=&quot;#&quot; style=&quot;color: #1473e6; text-decoration: none;&quot;>Este é um link</a>',
-                css: 'p {\n    font-size: 14px;\n    line-height: 1.6;\n    color: #2c2c2c;\n}\n\na {\n    color: #1473e6;\n    text-decoration: none;\n    transition: color 0.2s;\n}\n\na:hover {\n    color: #0d66d0;\n    text-decoration: underline;\n}'
-            },
-            buttons: {
-                name: 'Botões',
-                description: 'Botões permitem que usuários executem ações com um único toque.',
-                type: 'component',
-                html: '<button class=&quot;spectrum-button&quot;>Click me</button>',
-                css: '.spectrum-button {\n    background: #1473e6;\n    color: white;\n    border: none;\n    padding: 12px 24px;\n    border-radius: 4px;\n    font-size: 14px;\n    font-weight: 500;\n    cursor: pointer;\n    transition: background 0.2s;\n}\n\n.spectrum-button:hover {\n    background: #0d66d0;\n}'
-            },
-            dropdown: {
-                name: 'Dropdown',
-                description: 'Dropdowns permitem que usuários selecionem uma opção de uma lista.',
-                type: 'component',
-                html: '<select class=&quot;spectrum-input&quot;>\n    <option>Opção 1</option>\n    <option>Opção 2</option>\n    <option>Opção 3</option>\n</select>',
-                css: 'select {\n    padding: 10px 12px;\n    border: 1px solid #bcbcbc;\n    border-radius: 4px;\n    font-size: 14px;\n    width: 300px;\n    cursor: pointer;\n}'
-            },
-            cards: {
-                name: 'Cards',
-                description: 'Cards são containers que agrupam informações relacionadas.',
-                type: 'component',
-                html: '<div class=&quot;spectrum-card&quot;>\n    <h3 style=&quot;margin-bottom: 12px;&quot;>Card Title</h3>\n    <p style=&quot;color: #747474;&quot;>Este é o conteúdo do card com informações relevantes.</p>\n</div>',
-                css: '.spectrum-card {\n    background: white;\n    border: 1px solid #e1e1e1;\n    border-radius: 8px;\n    padding: 24px;\n    width: 300px;\n}'
-            },
-            icons: {
-                name: 'Ícones',
-                description: 'Ícones são elementos visuais que representam ações, objetos ou conceitos.',
-                type: 'component',
-                html: '<svg width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;#1473e6&quot; stroke-width=&quot;2&quot;>\n    <circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot;/>\n    <path d=&quot;M12 6v6l4 2&quot;/>\n</svg>',
-                css: 'svg {\n    display: inline-block;\n    vertical-align: middle;\n}'
-            },
-            images: {
-                name: 'Imagens',
-                description: 'Diretrizes para uso de imagens e elementos visuais no design system.',
-                type: 'component',
-                html: '<img src=&quot;https://via.placeholder.com/300x200&quot; alt=&quot;Exemplo&quot; style=&quot;border-radius: 8px; max-width: 100%;&quot;>',
-                css: 'img {\n    max-width: 100%;\n    height: auto;\n    border-radius: 8px;\n    display: block;\n}'
-            },
-            templates: {
-                name: 'Templates',
-                description: 'Templates pré-definidos para acelerar o desenvolvimento de interfaces comuns.',
-                type: 'resource'
-            },
-            guidelines: {
-                name: 'Guideline de Uso',
-                description: 'Diretrizes e boas práticas para uso correto dos componentes do design system.',
-                type: 'resource'
-            }
-        }
-    }">
-        <div class="sidebar">
-            <div style="display: flex; justify-content: center;">
-                <img src="logo-rede-feminina.png" style="height: 90px; width: 200px;" alt="Logo">
-            </div>
+    <header class="header">
+        <div class="logo">
+            <img src="logo-rede-feminina.png" alt="Rede Feminina" class="logo-img">
+        </div>
+    </header>
 
-            <div class="nav-section">
-                <div class="nav-title">Fundamentos</div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'colors' }"
-                     @click="selected = 'colors'; activeTab = 'preview'">
-                    Paleta de Cores
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="nav">
+                <div class="nav-section">
+                    <br>
+                    <h3 class="nav-section-title">FUNDAMENTOS</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item active">
+                            <a href="#paleta-cores">Paleta de Cores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#tipografia">Tipografia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#sombra-borda">Sombras e Bordas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#iconografia">Iconografia</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'typography' }"
-                     @click="selected = 'typography'; activeTab = 'preview'">
-                    Tipografia
-                </div>
-            </div>
-            
-            <div class="nav-section">
-                <div class="nav-title">Componentes</div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'texts' }"
-                     @click="selected = 'texts'; activeTab = 'preview'">
-                    Textos e Links
-                </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'buttons' }"
-                     @click="selected = 'buttons'; activeTab = 'preview'">
-                    Botões
-                </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'dropdown' }"
-                     @click="selected = 'dropdown'; activeTab = 'preview'">
-                    Dropdown
-                </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'cards' }"
-                     @click="selected = 'cards'; activeTab = 'preview'">
-                    Cards
-                </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'icons' }"
-                     @click="selected = 'icons'; activeTab = 'preview'">
-                    Ícones
-                </div>
-                <div class="nav-item" 
-                     :class="{ 'active': selected === 'images' }"
-                     @click="selected = 'images'; activeTab = 'preview'">
-                    Imagens
-                </div>
-            </div>
 
-            <div class="nav-section">
-                <div class="nav-title">Recursos</div>
-                <div class="nav-item" 
-                    :class="{ 'active': selected === 'templates' }"
-                    @click="selected = 'templates'; activeTab = 'preview'">
-                    Templates
+                <div class="nav-section">
+                    <h3 class="nav-section-title">COMPONENTES</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#textos-links">Links</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#botoes">Botões</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#dropdown">Dropdown</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#cards">Cards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#carrosel">Carrosel</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="nav-item" 
-                    :class="{ 'active': selected === 'guidelines' }"
-                    @click="selected = 'guidelines'; activeTab = 'preview'">
-                    Guideline de Uso
+
+                <div class="nav-section">
+                    <h3 class="nav-section-title">RECURSOS</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#templates">Templates</a>
+                        </li>
+                    </ul>
                 </div>
+            </nav>
+        </aside>
+
+        <main class="content">
+
+            <!-- Paleta de Cores -->
+            <section id="paleta-cores" class="content-section active">
+                <h1 class="page-title">Paleta de Cores</h1>
+                <p class="page-description">
+                    Esta seção apresenta a paleta de cores completa do website da Rede Feminina, abrangendo cores primárias, secundárias, terciárias e todas as suas variações. Aqui você encontra os códigos hexadecimais correspondentes, os tokens CSS para implementação, além do contexto de uso recomendado para cada cor e variação, garantindo consistência visual em todo o website.
+                </p>
+
+                <div class="color-section">
+                    <h2 class="section-title">Cores Principais</h2>
+                    <div class="color-grid">
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #ce7b90;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Primária</span>
+                                <span class="color-name">Rosa Empoeirado</span>
+                                <span class="color-name">#ce7b90</span>
+                                <span class="color-name">--primary-color</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #f9c4c4;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Primária clara</span>
+                                <span class="color-name">Rosa Claro/Pastel</span>
+                                <span class="color-name">#f9c4c4</span>
+                                <span class="color-name">--primary-light</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #850e35;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Primária escura</span>
+                                <span class="color-name">Vinho/Bordô</span>
+                                <span class="color-name">#850e35</span>
+                                <span class="color-name">--primary-dark</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #213161;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Secundária</span>
+                                <span class="color-name">Azul Marinho</span>
+                                <span class="color-name">#213161</span>
+                                <span class="color-name">--secondary-color</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #545f71;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Secundária clara</span>
+                                <span class="color-name">Azul Acinzentado</span>
+                                <span class="color-name">#545f71</span>
+                                <span class="color-name">--secondary-light</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #161f3e;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Secundária escura</span>
+                                <span class="color-name">Azul Noturno</span>
+                                <span class="color-name">#161f3e</span>
+                                <span class="color-name">--secondary-light</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #759aab;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Terciária</span>
+                                <span class="color-name">Cinza Azulado</span>
+                                <span class="color-name">#759aab</span>
+                                <span class="color-name">--tertiary-color</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #adbcc7;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Terciária clara</span>
+                                <span class="color-name">Cinza Claro</span>
+                                <span class="color-name">#adbcc7</span>
+                                <span class="color-name">--tertiary-light</span>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <div class="color-swatch" style="background-color: #618191;"></div>
+                            <div class="color-info">
+                                <span class="color-code">Terciária escura</span>
+                                <span class="color-name">Azul Petroleo Acinzentado</span>
+                                <span class="color-name">#618191</span>
+                                <span class="color-name">--tertiary-dark</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h2 class="section-title">Contextos de Uso</h2>
+                        <ul>
+                            <li class="page-description">
+                                Cores primarias (Rosa Empoeirado, Rosa Claro/Pastel e Vinho/Bordô): 
+                                Estes tons de rosa foram empregados em todo o design do website como cor primaria
+                                por conta de sua importancia para o mantimento da identidade visual da Rede Feminina,
+                                que utiliza o rosa integralmente como forma de remeter ao tratamento oncologico, em especial
+                                ao tratamento do cancer de mama e ao outubro rosa. Estas tonalidades tambem estao presentes
+                                na logo e publicidade da Rede, sempre como cores destaque. Utilize para elementos que necessitem
+                                de destaque visual no website
+                            </li>
+
+                            <li class="page-description">
+                                Cores secundarias (Azul Marinho, Azul Acinzentado, Azul Noturno): 
+                                Seguindo o mesmo contexto dos tons de rosa, estes tons de azul foram utilizados para manter
+                                a identidade visual da Rede Feminina, por estar presente com destaque em sua logo. Porem, estes
+                                tons nao estao presentes em suas midias, entao sua introducao ao design do website teve como proposta trazer mais elementos
+                                da logotipo desta organizacao a suas midias digitais. Estes tons de azul tambem trazem sentimentos
+                                de confianca e responsabilidade ao design, de forma a fomentar mais ainda o comprometimento da Rede 
+                                com os pacientes pelos quais preza. Utilize para contrastar com os tons de rosa, em titulos e/ou botoes
+                                de acao, por exemplo.
+                            </li>
+
+                            <li class="page-description">
+                                Cores terciarias (Cinza Azulado, Cinza Claro e Azul Petroleo Acinzentado):
+                                Estes tons de cinza e azul foram adicionados ao design atual do website de forma a auxilar as
+                                cores anteriores, como em textos e icones informativos, informacoes de menor relevancia na estrutura
+                                do website entre outros usos. Estas tonalidades ja eram utilizadas com menos frequencia pela Rede em 
+                                postagens nas midias sociais.
+                            </li>
+                        </ul>
+                </div>
+            </section>
+            <!-- // Paleta de Cores // -->
+
+            <!-- Tipografia -->
+            <section id="tipografia" class="content-section">
+                <h1 class="page-title">Tipografia</h1>
+                <p class="page-description">
+                    Esta seção documenta o sistema tipográfico utilizado em todo o website, incluindo as famílias e fontes de texto, seus respectivos pesos, a escala completa de tamanhos e as alturas de linha estabelecidas. Aqui você também encontra as métricas detalhadas, as variáveis CSS para implementação, além do contexto de uso apropriado para cada combinação tipográfica, assegurando hierarquia visual e legibilidade em todas as aplicações.
+                </p>
+                <div class="placeholder-content">
+        <span style="font-family: 'Kadwa', serif; font-size: 60px; font-weight: 900;">
+            Kadwa, serif, 60px, 900
+        </span><br>
+        <span style="font-family: 'Kadwa', serif; font-size: 36px; font-weight: 700;">
+            Kadwa, serif, 36px, 700
+        </span><br>
+        <span style="font-family: 'Kadwa', serif; font-size: 24px; font-weight: 400;">
+            Kadwa, serif, 24px, 400
+        </span><br>
+
+        <span style="font-family: 'Inter', sans-serif; font-size: 30px; font-weight: 600;">
+            Inter, sans-serif, 30px, 600
+        </span><br>
+        <span style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 500;">
+            Inter, sans-serif, 20px, 500
+        </span><br>
+        <span style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400;">
+            Inter, sans-serif, 12px, 400
+        </span>
+                </div><br>
+
+                <p class="page-description">
+                    A tipografia do website da Rede utiliza duas fontes principais: Kadwa como fonte primária para títulos e Inter como fonte secundária 
+                    para o corpo do texto. A Kadwa é uma fonte serifada que traz elegância e destaque aos cabeçalhos, enquanto a Inter, 
+                    oferece excelente legibilidade para textos longos.
+                    O sistema tipográfico trabalha com três pesos principais: 
+                    400 (regular) para textos corridos, 
+                    700 (bold) para ênfases e subtítulos, 
+                    e 900 (black) para títulos de maior destaque. 
+                    A escala de tamanhos é flexível e abrangente, variando de 12px (xs) até 60px (6xl), permitindo criar uma hierarquia visual clara e 
+                    consistente em diferentes contextos.
+                    As alturas de linha são ajustadas conforme a necessidade, 
+                    desde tight (1.2) para títulos compactos até relaxed (1.625) para textos que requerem maior espaçamento e conforto de leitura, 
+                    garantindo acessibilidade e uma experiência visual harmoniosa em todo o website.
+                </p>
+            </section>
+            <!-- // Tipografia // -->
+
+            <!-- Sombras e Bordas -->
+            <section id="sombra-borda" class="content-section">
+    <h1 class="page-title">Sombras e Bordas</h1>
+    <p class="page-description">
+        Nesta seção, voce encontra as sombras e bordas utilizadas por todo o website. O sistema de sombras e bordas estabelece profundidade e hierarquia visual nos elementos da interface. As sombras variam em intensidade conforme a elevação dos componentes, enquanto as bordas definem limites e separações visuais com diferentes níveis de contraste. Abaixo estao dispostas as metricas e cores para ambas sombras e bordas, bem como uma visualizacao de como estes elementos podem atuar dentro do website. 
+    </p>
+    
+    <h2>Sombras (Shadows)</h2>
+    <div class="placeholder-content">
+        <div style="padding: 30px; margin: 20px 0; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+            <strong>Light Shadow</strong><br>
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08)
+        </div>
+        <div style="padding: 30px; margin: 20px 0; background: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+            <strong>Medium Shadow</strong><br>
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+        </div>
+        <div style="padding: 30px; margin: 20px 0; background: white; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);">
+            <strong>Heavy Shadow</strong><br>
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15)
+        </div>
+        <div style="padding: 30px; margin: 20px 0; background: white; box-shadow: 0 15px 30px rgba(206, 123, 144, 0.3);">
+            <strong>Primary Shadow</strong><br>
+            box-shadow: 0 15px 30px rgba(206, 123, 144, 0.3)
+        </div>
+        <div style="padding: 30px; margin: 20px 0; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <strong>Card Shadow</strong><br>
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+        </div>
+    </div><br>
+
+    <h2>Bordas (Borders)</h2>
+    <p class="page-description">
+        As bordas são utilizadas para delimitar áreas, criar separações sutis e enfatizar elementos interativos. Fora utilizado no website quatro variações de bordas com diferentes intensidades de contraste.
+    </p>
+    <div class="placeholder-content">
+        <div style="padding: 20px; margin: 20px 0; border: 2px solid #dddddd;">
+            <strong>Border Light</strong><br>
+            border: 2px solid #dddddd
+        </div>
+        <div style="padding: 20px; margin: 20px 0; border: 2px solid #cccccc;">
+            <strong>Border Medium</strong><br>
+            border: 2px solid #cccccc
+        </div>
+        <div style="padding: 20px; margin: 20px 0; border: 2px solid #999999;">
+            <strong>Border Dark</strong><br>
+            border: 2px solid #999999
+        </div>
+        <div style="padding: 20px; margin: 20px 0; border: 2px solid #ce7b90;">
+            <strong>Border Primary</strong><br>
+            border: 2px solid #ce7b90
+        </div>
+    </div>
+            </section>
+            <!-- // Sombras e Bordas // -->
+
+            <!-- Iconografia -->
+            <section id="iconografia" class="content-section">
+    <h1 class="page-title">Iconografia</h1>
+    <p class="page-description">
+        Nesta secao, temos o sistema de iconografia do website, que utiliza duas bibliotecas complementares para garantir variedade e consistência visual. Font Awesome 6 oferece ícones sólidos e reconhecíveis para ações e elementos comuns, enquanto Material Symbols proporciona um conjunto moderno e expressivo de ícones para interfaces mais elaboradas. Ambas as bibliotecas foram escolhidas por sua versatilidade, facilidade de implementação e ampla cobertura de casos de uso.
+    </p>
+    <div class="placeholder-content">
+        <h2>Font Awesome 6 (Free)</h2>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; padding: 20px; align-items: center;">
+            <div style="text-align: center;">
+                <i class="fa-solid fa-house" style="font-size: 36px; color: #ce7b90;"></i>
+                <p>fa-house</p>
+            </div>
+            <div style="text-align: center;">
+                <i class="fa-solid fa-user" style="font-size: 36px; color: #ce7b90;"></i>
+                <p>fa-user</p>
+            </div>
+            <div style="text-align: center;">
+                <i class="fa-solid fa-heart" style="font-size: 36px; color: #ce7b90;"></i>
+                <p>fa-heart</p>
+            </div>
+            <div style="text-align: center;">
+                <i class="fa-solid fa-gear" style="font-size: 36px; color: #ce7b90;"></i>
+                <p>fa-gear</p>
+            </div>
+            <div style="text-align: center;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size: 36px; color: #ce7b90;"></i>
+                <p>fa-magnifying-glass</p>
             </div>
         </div>
 
-        <div class="main-content">
-            <div class="component-header">
-                <h1 class="component-title" x-text="sections[selected].name"></h1>
-                <p class="component-description" x-text="sections[selected].description"></p>
+        <h2>Material Symbols</h2>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; padding: 20px; align-items: center;">
+            <div style="text-align: center;">
+                <span class="material-symbols-rounded" style="font-size: 36px; color: #ce7b90;">home</span>
+                <p>home</p>
             </div>
-
-            <!-- Seção de Cores -->
-            <div x-show="selected === 'colors'" class="component-section">
-                <h3 class="section-title">Cores Principais</h3>
-                <div class="color-palette">
-                    <div class="color-box" style="background: #ce7b90;">#ce7b90<br>Primária</div>
-                    <div class="color-box" style="background: #ffc4c4;">#ffc4c4<br>Primária clara</div>
-                    <div class="color-box" style="background: #850e35;">#850e35<br>Primária escura</div>
-                    <div class="color-box" style="background: #213161;">#213161<br>Secundária</div>
-                    <div class="color-box" style="background: #545f71;">#545f71<br>Secundária clara</div>
-                    <div class="color-box" style="background: #161f3e;">#161f3e<br>Secundária escura</div>
-                    <div class="color-box" style="background: #759aab;">#759aab<br>Terciária</div>
-                    <div class="color-box" style="background: #618191;">#618191<br>Terciária clara</div>
-                    <div class="color-box" style="background: #a6bcc7;">#a6bcc7<br>Terciária escura</div>
-                </div>
+            <div style="text-align: center;">
+                <span class="material-symbols-rounded" style="font-size: 36px; color: #ce7b90;">person</span>
+                <p>person</p>
             </div>
-
-            <!-- Seção de Tipografia -->
-            <div x-show="selected === 'typography'" class="component-section">
-                <div class="typography-sample">
-                    <h1 style="font-size: 36px; font-weight: 700; margin-bottom: 16px;">Heading 1 - 36px Bold</h1>
-                    <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">Heading 2 - 24px Bold</h2>
-                    <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">Heading 3 - 20px Semibold</h3>
-                    <h4 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Heading 4 - 18px Semibold</h4>
-                    <p style="font-size: 14px; margin-bottom: 16px;">Body Text - 14px Regular</p>
-                    <p style="font-size: 12px; margin-bottom: 16px;">Small Text - 12px Regular</p>
-                </div>
+            <div style="text-align: center;">
+                <span class="material-symbols-rounded" style="font-size: 36px; color: #ce7b90;">favorite</span>
+                <p>favorite</p>
             </div>
-
-            <!-- Seções com Componentes -->
-            <div x-show="sections[selected].type === 'component'" class="component-section">
-                <div class="tabs">
-                    <div class="tab" 
-                         :class="{ 'active': activeTab === 'preview' }"
-                         @click="activeTab = 'preview'">
-                        Preview
-                    </div>
-                    <div class="tab" 
-                         :class="{ 'active': activeTab === 'code' }"
-                         @click="activeTab = 'code'">
-                        Code
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'preview'">
-                    <h3 class="section-title">Exemplo</h3>
-                    <div class="component-preview">
-                        <!-- Textos e Links -->
-                        <template x-if="selected === 'texts'">
-                            <div>
-                                <p style="margin-bottom: 16px;">Este é um parágrafo de texto padrão.</p>
-                                <a href="#" style="color: #1473e6; text-decoration: none;">Este é um link</a>
-                            </div>
-                        </template>
-
-                        <!-- Botões -->
-                        <template x-if="selected === 'buttons'">
-                            <button class="spectrum-button">Click me</button>
-                        </template>
-
-                        <!-- Dropdown -->
-                        <template x-if="selected === 'dropdown'">
-                            <select class="spectrum-input">
-                                <option>Opção 1</option>
-                                <option>Opção 2</option>
-                                <option>Opção 3</option>
-                            </select>
-                        </template>
-
-                        <!-- Cards -->
-                        <template x-if="selected === 'cards'">
-                            <div class="spectrum-card">
-                                <h3 style="margin-bottom: 12px;">Card Title</h3>
-                                <p style="color: #747474;">Este é o conteúdo do card com informações relevantes.</p>
-                            </div>
-                        </template>
-
-                        <!-- Ícones -->
-                        <template x-if="selected === 'icons'">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1473e6" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                        </template>
-
-                        <!-- Imagens -->
-                        <template x-if="selected === 'images'">
-                            <img src="https://via.placeholder.com/300x200" alt="Exemplo" style="border-radius: 8px; max-width: 100%;">
-                        </template>
-                    </div>
-                </div>
-
-                <div x-show="activeTab === 'code'">
-                    <div style="margin-bottom: 32px;">
-                        <div class="code-label">HTML</div>
-                        <div class="code-block">
-                            <pre x-text="sections[selected].html"></pre>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="code-label">CSS</div>
-                        <div class="code-block">
-                            <pre x-text="sections[selected].css"></pre>
-                        </div>
-                    </div>
-                </div>
+            <div style="text-align: center;">
+                <span class="material-symbols-rounded" style="font-size: 36px; color: #ce7b90;">settings</span>
+                <p>settings</p>
             </div>
-
-            <!-- Seção de Templates -->
-            <div x-show="selected === 'templates'" class="component-section">
-                <h3 class="section-title">Templates Disponíveis</h3>
-                <div class="content-text">
-                    <p style="margin-bottom: 16px;">Em breve: templates prontos para uso incluindo layouts de página, formulários, dashboards e muito mais.</p>
-                </div>
-            </div>
-
-            <!-- Seção de Guidelines -->
-            <div x-show="selected === 'guidelines'" class="component-section">
-                <h3 class="section-title">Boas Práticas</h3>
-                <div class="content-text">
-                    <p style="margin-bottom: 16px;">• Mantenha consistência visual usando sempre as cores da paleta definida</p>
-                    <p style="margin-bottom: 16px;">• Use a hierarquia tipográfica adequada para organizar o conteúdo</p>
-                    <p style="margin-bottom: 16px;">• Aplique espaçamentos consistentes entre elementos</p>
-                    <p style="margin-bottom: 16px;">• Teste a acessibilidade de todos os componentes</p>
-                    <p>• Documente modificações e novos componentes criados</p>
-                </div>
+            <div style="text-align: center;">
+                <span class="material-symbols-rounded" style="font-size: 36px; color: #ce7b90;">search</span>
+                <p>search</p>
             </div>
         </div>
     </div>
+            </section>
+            <!-- // Iconografia // -->
+
+            <!-- Links -->
+            <section id="textos-links" class="content-section">
+    <h1 class="page-title">Links</h1>
+    <p class="page-description">
+        Os links do sistema seguem um padrão visual consistente, com transições suaves e feedback visual ao hover. Utilizados principalmente na navegação principal, os links apresentam uma linha animada que surge de baixo para cima, reforçando a interação do usuário com o elemento.
+    </p>
+    <div class="placeholder-content">
+        <h2>Links de Navegação</h2>
+        <p style="margin-bottom: 2rem;">Exemplo de links utilizados no header com efeito hover e linha animada:</p>
+        
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <nav style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="nav-link-example" style="text-decoration: none; color: #ce7b90; font-weight: 700; font-size: 16px; position: relative; padding-bottom: 5px; transition: color 0.3s ease; display: inline-block;">
+                    História
+                </a>
+                <a href="#" class="nav-link-example" style="text-decoration: none; color: #ce7b90; font-weight: 700; font-size: 16px; position: relative; padding-bottom: 5px; transition: color 0.3s ease; display: inline-block;">
+                    Ações
+                    <span style="content: ''; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background-color: #ce7b90; display: block;"></span>
+                </a>
+            </nav>
+        </div>
+        
+        <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Propriedades de Estilo:</h2>
+        <div style="background: #f5f5f5; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px;">
+            <strong>Estado Normal:</strong><br>
+            text-decoration: none<br>
+            color: #2d2d2d<br>
+            font-weight: 700 (bold)<br>
+            font-size: 16px<br>
+            position: relative<br>
+            padding-bottom: 5px<br>
+            transition: color 0.3s ease<br><br>
+            
+            <strong>Estado Hover:</strong><br>
+            color: #ce7b90<br><br>
+            
+            <strong>Linha Animada (::after):</strong><br>
+            content: ''<br>
+            position: absolute<br>
+            width: 0 → 100% (no hover)<br>
+            height: 2px<br>
+            bottom: 0<br>
+            left: 0<br>
+            background-color: #ce7b90<br>
+            transition: width 0.3s ease
+        </div>
+        
+        <style>
+            .nav-link-example::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #ce7b90;
+                transition: width 0.3s ease;
+            }
+            .nav-link-example:hover {
+                color: #ce7b90;
+            }
+            .nav-link-example:hover::after {
+                width: 100%;
+            }
+        </style>
+    </div>
+            </section>
+            <!-- // Links // -->
+
+            <!-- Botões -->
+            <section id="botoes" class="content-section">
+    <h1 class="page-title">Botões</h1>
+    <p class="page-description">
+        O sistema de botões oferece duas variações principais: primário e outline. O botão primário utiliza a cor principal da marca com preenchimento sólido, ideal para ações principais. O botão outline apresenta apenas borda, sendo adequado para ações secundárias. Ambos possuem estados de hover com animações suaves que elevam o elemento visualmente.
+    </p>
+    <div class="placeholder-content">
+        <h2>Botão Primário</h2>
+        <p style="margin-bottom: 1rem;">Utilizado para ações principais com animação de elevação no hover:</p>
+        <div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap;">
+            <button class="btn-primary-example" style="background: #ce7b90; color: #ffffff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                CONHECER NOSSAS AÇÕES
+            </button>
+            <div style="color: #666; font-size: 14px;">← Passe o mouse para ver o efeito</div>
+        </div>
+        
+        <div style="background: #f5f5f5; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px;">
+            <strong>Propriedades:</strong><br>
+            background: #ce7b90<br>
+            color: #ffffff<br>
+            font-family: 'Kadwa', serif<br>
+            font-weight: 700 (bold)<br>
+            font-size: 14px<br>
+            text-transform: uppercase<br>
+            letter-spacing: 0.5px<br>
+            border: none<br>
+            padding: 12px 24px<br>
+            border-radius: 8px<br>
+            cursor: pointer<br>
+            transition: all 0.3s ease<br><br>
+            
+            <strong>Hover:</strong><br>
+            background: #b8667a<br>
+            transform: translateY(-2px)<br>
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
+        </div>
+
+        <br>
+        <h2>Botão Info Outline</h2>
+        <p style="margin-bottom: 1rem;">Utilizado para ações secundárias com preenchimento no hover:</p>
+        <div style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; flex-wrap: wrap;">
+    <button class="btn-outline-example">
+        ÁREA RESTRITA
+    </button>
+    <div style="color: #666; font-size: 14px;">← Passe o mouse para ver o efeito</div>
+</div>
+
+<div style="background: #f5f5f5; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px;">
+    <strong>Propriedades:</strong><br>
+    background: transparent<br>
+    color: #759aab; <br>
+    border: 2px solid #759aab; <br>
+    font-family: 'Inter', sans-serif<br>
+    font-weight: 700 (bold)<br>
+    font-size: 14px<br>
+    text-transform: uppercase<br>
+    padding: 10px 22px<br>
+    border-radius: 8px<br>
+    cursor: pointer<br>
+    transition: all 0.3s ease<br><br>
+    
+    <strong>Hover:</strong><br>
+    background: #759aab;<br>
+    color: #ffffff
+</div>
+
+<style>
+    .btn-outline-example {
+        color: #759aab; 
+        border: 2px solid #759aab; 
+        font-family: 'Inter', sans-serif; 
+        font-weight: 700; 
+        font-size: 14px; 
+        text-transform: uppercase; 
+        padding: 10px 22px; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        transition: all 0.3s ease;
+        background: transparent; 
+    }
+
+    .btn-outline-example:hover {
+        background: #759aab; 
+        color: #ffffff;
+    }
+    
+    .btn-primary-example:hover {
+        background: #b8667a;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>
+    </div>
+            </section>
+            <!-- // Botões // -->
+
+            <!-- Dropdown -->
+            <section id="dropdown" class="content-section">
+    <h1 class="page-title">Dropdown</h1>
+    <p class="page-description">
+        Os componentes dropdown permitem organizar conteúdo hierárquico em menus expansíveis. Posicionados de forma absoluta, os submenus aparecem abaixo do item pai com animação suave de opacidade e translação. O sistema utiliza a classe "open" para controlar a visibilidade, permitindo implementação tanto por hover quanto por clique.
+    </p>
+    <div class="placeholder-content">
+        <h2>Exemplo de Dropdown</h2>
+        <p style="margin-bottom: 2rem;">Menu de navegação com submenu dropdown (clique em "Eventos" para expandir):</p>
+        
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); position: relative; min-height: 280px;">
+            <nav>
+                <ul style="list-style: none; display: flex; gap: 20px; background-color: #ffffff; position: relative; padding: 0; margin: 0;">
+                    <li style="position: relative;">
+                        <a href="#" style="text-decoration: none; color: #2d2d2d; font-weight: 700; padding: 10px 15px; display: block;">
+                            História
+                        </a>
+                    </li>
+                    <li style="position: relative;">
+                        <a href="#" style="text-decoration: none; color: #2d2d2d; font-weight: 700; padding: 10px 15px; display: block;">
+                            Ações
+                        </a>
+                    </li>
+                    <li class="dropdown-example" style="position: relative;">
+                        <a href="#" class="dropdown-toggle-example" style="text-decoration: none; color: #8b1538; font-weight: 700; padding: 10px 15px; display: block; cursor: pointer;" onclick="event.preventDefault(); this.parentElement.classList.toggle('open');">
+                            Eventos ▼
+                        </a>
+                        <ul class="submenu-example" style="display: none; position: absolute; top: 100%; left: 0; background-color: #ffffff; padding: 10px 0; border-radius: 5px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); z-index: 1000; min-width: 200px; list-style: none; opacity: 0; transform: translateY(-10px); transition: all 0.3s ease; margin: 0;">
+                            <li class="submenu-item-example" style="white-space: nowrap; padding: 10px 20px; transition: background 0.3s;">
+                                <a href="#" style="text-decoration: none; color: #8b1538; font-weight: 700;">Próximos Eventos</a>
+                            </li>
+                            <li class="submenu-item-example" style="white-space: nowrap; padding: 10px 20px; transition: background 0.3s;">
+                                <a href="#" style="text-decoration: none; color: #8b1538; font-weight: 700;">Eventos Realizados</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="position: relative;">
+                        <a href="#" style="text-decoration: none; color: #2d2d2d; font-weight: 700; padding: 10px 15px; display: block;">
+                            Galeria
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Propriedades de Estilo:</h3>
+        
+        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 1.5rem;">
+            <strong>Container Principal (nav ul):</strong><br>
+            list-style: none<br>
+            display: flex<br>
+            gap: 20px<br>
+            background-color: #ffffff<br>
+            position: relative
+        </div>
+
+        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 1.5rem;">
+            <strong>Item Pai (nav li):</strong><br>
+            position: relative
+        </div>
+
+        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px; margin-bottom: 1.5rem;">
+            <strong>Dropdown/Submenu (nav ul li ul):</strong><br>
+            display: none (padrão)<br>
+            display: block (quando .open está presente)<br>
+            position: absolute<br>
+            top: 100%<br>
+            left: 0<br>
+            background-color: #ffffff<br>
+            padding: 10px 0<br>
+            border-radius: 5px<br>
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1)<br>
+            z-index: 1000<br>
+            min-width: 200px<br><br>
+            
+            <strong>Animação (Estado Fechado):</strong><br>
+            opacity: 0<br>
+            transform: translateY(-10px)<br>
+            transition: all 0.3s ease<br><br>
+            
+            <strong>Animação (Estado Aberto - .open):</strong><br>
+            opacity: 1<br>
+            transform: translateY(0)
+        </div>
+
+        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; font-family: monospace; font-size: 14px;">
+            <strong>Itens do Submenu (nav ul li ul li):</strong><br>
+            white-space: nowrap<br>
+            padding: 10px 20px<br>
+            transition: background 0.3s<br><br>
+            
+            <strong>Hover:</strong><br>
+            background-color: #fce8ed
+        </div>
+        
+        <style>
+            .dropdown-example.open .submenu-example {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .submenu-item-example:hover {
+                background-color: #fce8ed;
+            }
+        </style>
+    </div>
+            </section>
+            <!-- // Dropdown // -->
+
+            <!-- Cards -->
+            <section id="cards" class="content-section">
+        <h1 class="page-title">Cards</h1>
+        <p class="page-description">
+            Os Cards são containers modulares essenciais, projetados para agrupar e exibir conteúdos relacionados em um formato claro e digerível. Eles seguem um padrão visual de cantos arredondados, fundo branco e sombras suaves (box-shadow), o que os destaca sutilmente do plano de fundo da página.
+        </p>
+        <div class="placeholder-content">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 90px; height: 90px; background: #ce7b90; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2.5rem; color: #ffffff; box-shadow: 0 4px 12px rgba(206, 123, 144, 0.4);">
+                        <i class="fa-solid fa-lightbulb" style="font-size: 40px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Inovação</h3>
+                    <p style="font-size: 1rem; color: #6c757d; line-height: 1.6;">Foco em novas ideias e métodos.</p>
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 90px; height: 90px; background: #213161; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2.5rem; color: #ffffff; box-shadow: 0 4px 12px rgba(33, 49, 97, 0.4);">
+                        <i class="fa-solid fa-handshake" style="font-size: 40px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Colaboração</h3>
+                    <p style="font-size: 1rem; color: #6c757d; line-height: 1.6;">Trabalho em equipe para alcançar objetivos.</p>
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 90px; height: 90px; background: #759aab; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2.5rem; color: #ffffff; box-shadow: 0 4px 12px rgba(117, 154, 171, 0.4);">
+                        <i class="fa-solid fa-star" style="font-size: 40px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Excelência</h3>
+                    <p style="font-size: 1rem; color: #6c757d; line-height: 1.6;">Busca contínua pela melhoria da qualidade.</p>
+                </div>
+            </div>
+            <br>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto 3rem auto;">
+
+                <a href="#" style="background-color: #ffffff; padding: 3rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border: 2px solid #f9c4c4; display: flex; justify-content: center; align-items: center; text-decoration: none; color: inherit;">
+                    <h3 style="color: #850e35; font-size: 1.25rem; font-weight: 700; line-height: 1.4; margin: 0;">Conheça nossos <br> Projetos Atuais</h3>
+                </a>
+
+                <a href="#" style="background-color: #ffffff; padding: 3rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border: 2px solid #f9c4c4; display: flex; justify-content: center; align-items: center; text-decoration: none; color: inherit;">
+                    <h3 style="color: #850e35; font-size: 1.25rem; font-weight: 700; line-height: 1.4; margin: 0;">Participe de <br> Próximos Eventos</h3>
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 150px; height: 150px; margin: -4rem auto 1.5rem; border-radius: 50%; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border: 6px solid #ffffff; display: flex; align-items: center; justify-content: center; background: #fff;">
+                        <span class="material-symbols-rounded" style="font-size: 60px; color: var(--primary-color);">payments</span>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Doação Financeira</h3>
+                    <p style="font-size: 1rem; color: #6c757d; margin-bottom: 1.5rem;">Contribua com qualquer valor para as nossas causas.</p>
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 150px; height: 150px; margin: -4rem auto 1.5rem; border-radius: 50%; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border: 6px solid #ffffff; display: flex; align-items: center; justify-content: center; background: #fff;">
+                        <span class="material-symbols-rounded" style="font-size: 60px; color: var(--tertiary-color);">volunteer_activism</span>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Voluntariado</h3>
+                    <p style="font-size: 1rem; color: #6c757d; margin-bottom: 1.5rem;">Dedique seu tempo e habilidades em nossos eventos.</p>
+                    <!-- Overriding outline button color to secondary for variation -->
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div style="width: 150px; height: 150px; margin: -4rem auto 1.5rem; border-radius: 50%; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border: 6px solid #ffffff; display: flex; align-items: center; justify-content: center; background: #fff;">
+                        <span class="material-symbols-rounded" style="font-size: 60px; color: var(--primary-color);">share</span>
+                    </div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">Divulgação</h3>
+                    <p style="font-size: 1rem; color: #6c757d; margin-bottom: 1.5rem;">Compartilhe nosso trabalho e alcance mais pessoas.</p>
+                </div>
+            </div>
+        </div>
+            </section>
+            <!-- // Cards // -->
+
+            <!-- Carrosel -->
+            <section id="carrosel" class="content-section">
+                <h1 class="page-title">Carrosel</h1>
+                <p class="page-description">
+                    Os Carrosséis são componentes dinâmicos projetados para exibir múltiplas mídias (como imagens de eventos) de forma organizada e eficiente dentro de um espaço limitado. O elemento principal, o contêiner do carrossel, garante um overflow: hidden, permitindo que a trilha de itens se desloque horizontalmente. A navegação é intuitiva, utilizando setas posicionadas lateralmente, com feedback visual claro (fundo primário e cor branca) para indicar interatividade.
+                </p>
+                <div class="placeholder-content">
+
+    <div style="position: relative; display: flex; align-items: center; overflow: hidden; width: 100%; max-width: 1000px; margin: auto;">
+        
+        <button style="background: #ce7b90; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; left: 10px; font-size: 1.2rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            &#10094; </button>
+
+        <div style="display: flex; transition: transform 0.4s ease; gap: 15px; width: 100%; height: flex-start; padding: 0 50px;">
+            
+            <div style="flex: 0 0 auto; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="images (1).jpeg" alt="Evento 1" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            </div>
+
+            <div style="flex: 0 0 auto; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="images (2).jpeg" alt="Evento 2" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            </div>
+
+            <div style="flex: 0 0 auto; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="images.jpeg" alt="Evento 3" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            </div>
+            
+            <div style="flex: 0 0 auto; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="vida-de-gato.jpg" alt="Evento 4" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            </div>
+
+            <div style="flex: 0 0 auto; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <img src="eduquer-son-Chaton-comment-bien-eduquer-son-Chaton-mobile.jpg" alt="Evento 5" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            </div>
+            
+        </div>
+
+        <button style="background: #ce7b90; color: #fff; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; right: 10px; font-size: 1.2rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            &#10095; </button>
+    </div>
+    
+    <button style="background: #ce7b90; color: #ffffff; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.5px; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-top: 2rem;">Ver Galeria Completa</button>
+                </div>
+            </section>
+            <!-- // Carrosel // -->
+
+            <!-- Templates -->
+    <section id="templates" style="padding: 40px 0;">
+        <h1 class="page-title">Templates de Componentes de Layout</h1>
+                <p class="page-description">
+                    Esta seção apresenta combinações de cores, tipografia e componentes para criar seções completas do website, garantindo a consistência visual.
+                </p>
+
+        <!-- 1. Template: Header/Navegação -->
+        <h2 style="font-family: 'Kadwa', serif; font-size: 1.75rem; font-weight: 700; color: var(--secondary-color); text-align: center; margin-top: 3rem; margin-bottom: 2rem;">1. Header/Navegação Principal</h2>
+        <div style="background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 0;">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+                <a href="#" style="font-family: 'Kadwa', serif; font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); text-decoration: none;">REDE FEMININA</a>
+                <nav style="display: flex; align-items: center;">
+                    <a href="#" style="color: #4b4b4b; text-decoration: none; margin-left: 30px; font-weight: 600; transition: color 0.3s;">Início</a>
+                    <a href="#" style="color: #4b4b4b; text-decoration: none; margin-left: 30px; font-weight: 600; transition: color 0.3s;">Ações</a>
+                    <a href="#" style="color: #4b4b4b; text-decoration: none; margin-left: 30px; font-weight: 600; transition: color 0.3s;">Sobre</a>
+                    <button style="background-color: var(--primary-color, #ff6b81); color: #ffffff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; transition: background-color 0.3s; padding: 8px 18px; font-size: 12px; margin-left: 25px;">DOAR AGORA</button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 2. Template: Hero Section (Destaque Principal) -->
+        <h2 style="font-family: 'Kadwa', serif; font-size: 1.75rem; font-weight: 700; color: var(--secondary-color); text-align: center; margin-top: 3rem; margin-bottom: 2rem;">2. Hero Section (Destaque Principal)</h2>
+        <div style="background: linear-gradient(135deg, #ffe6ea 0%, #fff 100%); padding: 80px 0 100px; text-align: center;">
+            <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+                <h1 style="font-family: 'Kadwa', serif; font-size: 3rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 20px; line-height: 1.2;">
+                    Lutando Juntas por um Futuro Mais Saudável
+                </h1>
+                <p style="font-size: 1.25rem; color: #4b4b4b; margin-bottom: 30px;">
+                    A Rede Feminina de Combate ao Câncer transforma vidas através de apoio humanizado, prevenção e tratamento. Junte-se à nossa causa.
+                </p>
+                <button style="background-color: var(--primary-color, #ff6b81); color: #ffffff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; transition: background-color 0.3s; padding: 12px 25px; font-size: 1rem;">
+                    <i class="fa-solid fa-hand-holding-heart" style="margin-right: 8px;"></i> CONHEÇA NOSSAS AÇÕES
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Template: Cards de Destaque em Seção -->
+        <h2 style="font-family: 'Kadwa', serif; font-size: 1.75rem; font-weight: 700; color: var(--secondary-color); text-align: center; margin-top: 3rem; margin-bottom: 2rem;">3. Seção de Cards (Destaque de Serviços)</h2>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h2 style="text-align: center; color: var(--primary-dark); font-weight: 700; font-size: 2.25rem; margin-bottom: 3rem;">Nossos Pilares de Atuação</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: var(--shadow-card); transition: transform 0.3s ease;">
+                    <span class="material-symbols-rounded" style="font-size: 50px; color: var(--primary-color); margin-bottom: 1rem;">health_and_safety</span>
+                    <h3 style="font-family: 'Kadwa', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Apoio Psicológico</h3>
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">Oferecemos suporte emocional e psicológico para pacientes e familiares durante toda a jornada.</p>
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: var(--shadow-card); transition: transform 0.3s ease;">
+                    <span class="material-symbols-rounded" style="font-size: 50px; color: var(--primary-color); margin-bottom: 1rem;">volunteer_activism</span>
+                    <h3 style="font-family: 'Kadwa', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Doações e Ajuda Material</h3>
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">Distribuição de próteses, perucas e cestas básicas para quem mais precisa.</p>
+                </div>
+
+                <div style="background: #ffffff; padding: 2.5rem 2rem; border-radius: 15px; box-shadow: var(--shadow-card); transition: transform 0.3s ease;">
+                    <span class="material-symbols-rounded" style="font-size: 50px; color: var(--primary-color); margin-bottom: 1rem;">campaign</span>
+                    <h3 style="font-family: 'Kadwa', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Campanhas de Prevenção</h3>
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">Palestras e eventos focados na conscientização e diagnóstico precoce.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Template: Formulário de Contato -->
+        <h2 style="font-family: 'Kadwa', serif; font-size: 1.75rem; font-weight: 700; color: var(--secondary-color); text-align: center; margin-top: 3rem; margin-bottom: 2rem;">4. Formulário de Contato/Mensagem</h2>
+        <div style="max-width: 500px; margin: 40px auto; padding: 30px; background-color: #ffffff; border-radius: 12px; box-shadow: var(--shadow-card);">
+            <h3 style="font-family: 'Kadwa', serif; font-weight: 700; font-size: 1.8rem; color: var(--secondary-color); margin-bottom: 2rem; text-align: center;">Entre em Contato</h3>
+            <form>
+                <input type="text" placeholder="Seu Nome Completo" required style="width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                <input type="email" placeholder="Seu Melhor E-mail" required style="width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
+                <textarea rows="5" placeholder="Sua Mensagem..." required style="width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: vertical;"></textarea>
+                <button type="submit" style="background-color: var(--primary-color, #ff6b81); color: #ffffff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; transition: background-color 0.3s; padding: 12px 25px; font-size: 1rem; width: 100%; margin-top: 10px;">
+                    ENVIAR MENSAGEM
+                </button>
+            </form>
+        </div>
+        <br><br>
+
+        <!-- 5. Template: Footer (Rodapé) -->
+        <h2 style="font-family: 'Kadwa', serif; font-size: 1.75rem; font-weight: 700; color: var(--secondary-color); text-align: center; margin-top: 3rem; margin-bottom: 2rem;">5. Footer (Rodapé)</h2>
+        <div style="background-color: #2c3e50; color: #ffffff; padding: 50px 20px; text-align: center;">
+            <span style="font-family: 'Kadwa', serif; font-size: 1.8rem; font-weight: 800; color: #ffffff; display: block; margin-bottom: 10px;">REDE FEMININA</span>
+            <p style="color: #adbcc7; margin-bottom: 20px;">
+                Rua Exemplo, 123 - Centro, Cidade - SP | Telefone: (11) 9999-8888
+            </p>
+            <div style="margin-bottom: 20px;">
+                <a href="#" target="_blank" style="color: #ffffff; font-size: 24px; margin: 0 10px; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" target="_blank" style="color: #ffffff; font-size: 24px; margin: 0 10px; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" target="_blank" style="color: #ffffff; font-size: 24px; margin: 0 10px; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank" style="color: #ffffff; font-size: 24px; margin: 0 10px; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+            <p style="color: #adbcc7;">
+                &copy; 2025 Rede Feminina. Todos os direitos reservados.
+            </p>
+        </div>
+
+    </section>
+    <!-- // Templates // -->
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,268 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #fafafa;
+    color: #2c2c2c;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 32px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 120px;
+    height: 60px;
+    border-radius: 4px;
+}
+
+.logo-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ce7b90;
+    letter-spacing: 0.5px;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    margin-top: 73px;
+    min-height: calc(100vh - 73px);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: #f5f5f5;
+    border-right: 1px solid #e5e5e5;
+    padding: 24px 0;
+    position: fixed;
+    height: calc(100vh - 73px);
+    overflow-y: auto;
+}
+
+.nav-section {
+    margin-bottom: 32px;
+}
+
+.nav-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #7a7a7a;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0 24px;
+    margin-bottom: 12px;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-item {
+    margin: 2px 0;
+}
+
+.nav-item a {
+    display: block;
+    padding: 8px 24px;
+    color: #2c2c2c;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-item a:hover {
+    background-color: #ebebeb;
+    color: #ce7b90;
+}
+
+.nav-item.active a {
+    background-color: #ffe4eb;
+    color: #ce7b90;
+    border-left-color: #ce7b90;
+    font-weight: 500;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    margin-left: 240px;
+    padding: 48px 64px;
+    max-width: 1400px;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.placeholder-content {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    color: #6e6e6e;
+    margin-top: 32px;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 16px;
+}
+
+.page-description {
+    font-size: 16px;
+    color: #6e6e6e;
+    margin-bottom: 48px;
+    line-height: 1.6;
+}
+
+/* Color Section */
+.color-section {
+    margin-bottom: 48px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 24px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.color-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.color-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.color-swatch {
+    width: 100%;
+    height: 120px;
+}
+
+.color-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.color-code {
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c2c2c;
+}
+
+.color-name {
+    font-size: 13px;
+    color: #6e6e6e;
+}
+
+/* Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #d0d0d0;
+    border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #b0b0b0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .content {
+        padding: 32px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+        padding: 24px 32px;
+    }
+
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 640px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 24px 20px;
+    }
+
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+}
